@@ -35,10 +35,8 @@ export function useIntersectionObserver({
       },
       { 
         threshold, 
-        rootMargin,
-        // Add passive option for better performance
-        passive: true 
-      } as IntersectionObserverInit & { passive?: boolean }
+        rootMargin
+      }
     )
 
     observer.observe(element)

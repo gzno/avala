@@ -8,20 +8,24 @@ const nextConfig = {
   },
   images: {
     unoptimized: false,
-    domains: ['hebbkx1anhila5yf.public.blob.vercel-storage.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'hebbkx1anhila5yf.public.blob.vercel-storage.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
     formats: ['image/webp', 'image/avif'],
     minimumCacheTTL: 31536000,
   },
   experimental: {
-    optimizeCss: true,
     scrollRestoration: true,
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
-  swcMinify: true,
   poweredByHeader: false,
-  compress: true,
 }
 
 export default nextConfig
