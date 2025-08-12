@@ -28,9 +28,17 @@ export function useIntersectionObserver({
         
         if (isCurrentlyIntersecting && !hasIntersected) {
           setHasIntersected(true)
+          if (triggerOnce) {
+            observer.unobserve(element)
+          }
         }
       },
-      { threshold, rootMargin }
+      { 
+        threshold, 
+        rootMargin,
+        // Add passive option for better performance
+        passive: true 
+      } as IntersectionObserverInit & { passive?: boolean }
     )
 
     observer.observe(element)
@@ -38,7 +46,7 @@ export function useIntersectionObserver({
     return () => {
       observer.disconnect()
     }
-  }, [threshold, rootMargin, hasIntersected])
+  }, [threshold, rootMargin, hasIntersected, triggerOnce])
 
   const shouldAnimate = triggerOnce ? hasIntersected : isIntersecting
 
@@ -71,7 +79,7 @@ export default function AnimatedSection({
   return (
     <div 
       ref={elementRef}
-      className={`transition-all duration-700 ease-out ${animationClasses[animation]} ${className}`}
+      className={`transition-all duration-500 ease-out animate-element ${animationClasses[animation]} ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}

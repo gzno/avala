@@ -3,13 +3,17 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import ErrorBoundary from "@/components/ErrorBoundary"
+import PerformanceOptimizer from "@/components/PerformanceOptimizer"
+import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const inter = Inter({
   subsets: ["latin"],
-  display: "fallback",
+  display: "swap",
   variable: "--font-inter",
   preload: true,
   weight: ["400", "500", "600", "700"],
+  adjustFontFallback: false,
 })
 
 export const metadata: Metadata = {
@@ -62,13 +66,18 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} antialiased loaded`}>
       <head>
-        <link rel="preconnect" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com" />
+        <link rel="preconnect" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://www.youtube.com" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="theme-color" content="#000000" />
       </head>
       <body className="font-sans">
+        <PerformanceOptimizer />
         <ErrorBoundary>
           <div className="page-transition">{children}</div>
         </ErrorBoundary>
+        <Analytics />
+        <SpeedInsights />
         <script
           dangerouslySetInnerHTML={{
             __html: `

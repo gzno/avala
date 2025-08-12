@@ -13,7 +13,7 @@ build/
 coverage/
 .nyc_output
 .cache
-.claude
+.claude/
 .parcel-cache
 *.pid
 *.seed

@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useCallback, useMemo } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -21,14 +21,24 @@ export default function WaitlistPage() {
   const [honeypot, setHoneypot] = useState("")
   const [lastSubmissionTime, setLastSubmissionTime] = useState<number | null>(null)
 
-  const getClientInfo = () => {
+  const getClientInfo = useCallback(() => {
     return {
       userAgent: typeof window !== 'undefined' ? navigator.userAgent : undefined,
       timestamp: new Date().toISOString(),
     }
-  }
+  }, [])
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const disposableDomains = useMemo(() => [
+    '10minutemail.com', 'guerrillamail.com', 'mailinator.com', 'yopmail.com',
+    'tempmail.org', 'temp-mail.org', '20minutemail.com', 'throwaway.email',
+    'mailinator.net', 'maildrop.cc', 'sharklasers.com', 'guerrillamail.info'
+  ], [])
+
+  const spamKeywords = useMemo(() => [
+    'crypto', 'bitcoin', 'loan', 'casino', 'viagra', 'cialis', 'pharmacy'
+  ], [])
+
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault()
     if (!email) return
 
@@ -51,11 +61,6 @@ export default function WaitlistPage() {
         throw new Error("Please enter a valid email address")
       }
 
-      const disposableDomains = [
-        '10minutemail.com', 'guerrillamail.com', 'mailinator.com', 'yopmail.com',
-        'tempmail.org', 'temp-mail.org', '20minutemail.com', 'throwaway.email',
-        'mailinator.net', 'maildrop.cc', 'sharklasers.com', 'guerrillamail.info'
-      ]
       
       const emailDomain = email.toLowerCase().split('@')[1]
       if (disposableDomains.includes(emailDomain)) {
@@ -75,7 +80,6 @@ export default function WaitlistPage() {
         throw new Error("Please keep your message under 500 characters")
       }
 
-      const spamKeywords = ['crypto', 'bitcoin', 'loan', 'casino', 'viagra', 'cialis', 'pharmacy']
       const reasonLower = reason.toLowerCase()
       if (spamKeywords.some(keyword => reasonLower.includes(keyword))) {
         throw new Error("Please provide a genuine reason for joining")
@@ -99,7 +103,7 @@ export default function WaitlistPage() {
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [email, honeypot, lastSubmissionTime, reason, role, disposableDomains, spamKeywords, getClientInfo])
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden font-sans">
