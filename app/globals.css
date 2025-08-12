@@ -152,6 +152,17 @@ body {
   }
 }
 
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 html {
   visibility: hidden;
   font-display: fallback;
@@ -229,6 +240,24 @@ button, a {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Enhanced placeholder visibility */
+::placeholder {
+  color: #d1d5db !important;
+  opacity: 1 !important;
+}
+
+/* Firefox placeholder styling */
+::-moz-placeholder {
+  color: #d1d5db !important;
+  opacity: 1 !important;
+}
+
+/* WebKit browsers placeholder styling */
+::-webkit-input-placeholder {
+  color: #d1d5db !important;
+  opacity: 1 !important;
 }
 
 .border-flow {

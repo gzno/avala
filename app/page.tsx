@@ -75,15 +75,15 @@ export default function HomePage() {
           />
         </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto space-y-10">
-          <AnimatedSection animation="fadeIn">
+        <div className="relative z-10 max-w-5xl mx-auto space-y-10 opacity-0 translate-y-4 animate-[heroFadeIn_1s_ease-out_0.3s_forwards]">
+          <AnimatedSection animation="slideUp" delay={800}>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
               <span className="bg-gradient-to-r from-[#5c6eff] to-[#b9c6ff] bg-clip-text text-transparent">Truth</span> at your{" "}
               <span className="bg-gradient-to-r from-[#5c6eff] to-[#b9c6ff] bg-clip-text text-transparent">cursor</span>.
             </h1>
           </AnimatedSection>
 
-          <AnimatedSection animation="slideUp" delay={200}>
+          <AnimatedSection animation="slideUp" delay={1000}>
             <div className="space-y-5 text-base md:text-lg lg:text-xl text-gray-300">
               <p>AI detection that pops up when you highlight, instantly.</p>
               <p className="font-medium">
@@ -94,7 +94,7 @@ export default function HomePage() {
             </div>
           </AnimatedSection>
 
-          <AnimatedSection animation="scaleIn" delay={400}>
+          <AnimatedSection animation="scaleIn" delay={1200}>
             <div className="relative inline-block">
               <Link href="/waitlist" aria-label="Join the Avala waitlist for early access">
                 <Button

@@ -192,7 +192,7 @@ export default function WaitlistPage() {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                     disabled={isLoading}
-                    className="bg-[#303335] border-gray-600 text-white placeholder-gray-400 h-12 text-base rounded-lg px-4 w-full disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                    className="bg-[#303335] border-gray-600 text-white placeholder-gray-300 h-12 text-base rounded-lg px-4 w-full disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
                     aria-describedby={error ? "email-error" : undefined}
                     autoComplete="email"
                   />
@@ -249,7 +249,7 @@ export default function WaitlistPage() {
                     value={reason}
                     onChange={(e) => setReason(e.target.value.slice(0, 500))}
                     disabled={isLoading}
-                    className="bg-[#303335] border-gray-600 text-white placeholder-gray-400 h-12 text-base rounded-lg px-4 w-full disabled:opacity-50"
+                    className="bg-[#303335] border-gray-600 text-white placeholder-gray-300 h-12 text-base rounded-lg px-4 w-full disabled:opacity-50"
                     maxLength={500}
                   />
                 </div>
